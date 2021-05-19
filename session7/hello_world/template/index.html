@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> {{ title }} </title>
+    </head>
+    <body>
+        {% if name != None %}
+            <b>Hello, {{name}}</b>
+        {% else %}
+            <a href="" > Log In</a>
+        {% endif %}
+
+        <ul>
+            {% for noticia in news %}
+                <li> {{noticia}}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
