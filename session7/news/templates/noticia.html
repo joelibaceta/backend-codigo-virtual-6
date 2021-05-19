@@ -1,0 +1,13 @@
+{% macro noticia(title, body, picture, ispremium=False) %}
+
+  <div class="card" style="width: 18rem;">
+    <img src="{{ picture }}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ title }}</h5>
+        {% if ispremium == True %}
+            <p class="card-text">{{ body }}</p>    
+        {% endif %}
+        </div>
+  </div>
+  
+{% endmacro %}

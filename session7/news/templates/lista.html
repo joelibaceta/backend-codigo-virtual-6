@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% import 'noticia.html' as macro %}
+
+{% block contenido %}
+    {% for n in news %}
+        {{ macro.noticia(n["title"], n["body"], n["picture"], ispremium) }}
+    {% endfor %}
+{% endblock %}
