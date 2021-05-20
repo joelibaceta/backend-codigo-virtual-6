@@ -1,0 +1,31 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %} Home {% endblock %}
+
+
+
+{% block content %}
+
+<ul class="nav nav-pills">
+    {% for item in types %}
+        <li class="nav-item">
+        <a class="nav-link active" href="#">{{item}}</a>
+        </li>
+    {% endfor %}
+    
+</ul>
+
+<ul class="list-group">
+    {% for product in products %}
+        <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">{{ product["title"] }}</h5>
+              <small class="text-muted">{{ product["price"] }}</small>
+            </div>
+            <p class="mb-1">{{ product["description"] }}</p>
+            <small class="text-muted">Donec id elit non mi porta.</small>
+          </a>
+    {% endfor %}
+</ul>
+
+{% endblock %}
