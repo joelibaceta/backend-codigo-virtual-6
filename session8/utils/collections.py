@@ -1,6 +1,9 @@
-def filter_by(collection, key, value):
-    return filter(lambda x: x[key] == value, collection)
+import json
 
+
+
+def filter_by(collection, key, value):
+    return list(filter(lambda x: x[key] == value, collection))
 
 def unique_keys(collection, key):
     
