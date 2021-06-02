@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Books Catalog</title>
+    </head>
+    <body>
+        <table boder="1">
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.autor }}</td>
+                    <td>{{ book.editorial }}</td>
+                    <td>{{ book.year }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
