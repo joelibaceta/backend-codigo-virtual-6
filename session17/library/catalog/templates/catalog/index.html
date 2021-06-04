@@ -1,18 +1,38 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Books Catalog</title>
-    </head>
-    <body>
-        <table boder="1">
-            {% for book in books %}
-                <tr>
-                    <td>{{ book.title }}</td>
-                    <td>{{ book.autor }}</td>
-                    <td>{{ book.editorial }}</td>
-                    <td>{{ book.year }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-    </body>
-</html>
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <a href="/catalog/books" class="btn btn-success">Agregar</a>
+    <table boder="1" class="table"> 
+        {# Iterar libros del catalogo #}
+        <!-- {% load split_name %} -->
+        <!-- {{ books | slice:":2" | join:", " }} -->
+        {% load format_name %}
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Editorial</th>
+            <th>Year</th>
+        </tr>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</code></td>
+                <td>
+                    <a href ="/catalog/{{book.editorial}}/books">
+                        {{book.editorial | upper }}
+                    </a>
+                </td>
+                <td>{{ book.year | add:"2" }}</td>
+                <td>
+                    <a class="btn btn-sm btn-info" 
+                        href="/book/{{book.id}}">
+                        Editar
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -21,13 +21,29 @@ from catalog import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^catalog[\/]?$', views.catalog_list),
+    #path('catalog/books', views.new_book),
+    # /catalog.html
+    # /catalog.json 
+
+    path('books', views.BookCreate.as_view()),
+    path('book/<pk>/', views.BookUpdate.as_view()),
+    path('authors', views.AuthorCreate.as_view()),
+    
+
+
+    path('catalog/books', views.new_book),
+    path('catalog/book/<pk>/update', views.update_book),
 
     #/catalog/planeta/books?year=2020   "2020"
     #/catalog/planeta/books?year=       ""
     #/catalog/planeta/books             None
 
-    re_path(r'catalog\/(?P<editorial>[a-zA-Z]+)\/books', views.get_books_by_editorial)
+    #re_path(r'catalog\/(?P<editorial>[a-zA-Z]+)\/books', views.get_books_by_editorial)
 
-    #path('catalog/<editorial>/books', views.get_books_by_editorial)
+    path('catalog/<editorial>/books', views.get_books_by_editorial)
 
 ]
+
+
+
+#python manange.py scaffold catalogo --model Editorial char:name char:country

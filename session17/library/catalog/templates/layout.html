@@ -1,0 +1,19 @@
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Books Catalog</title>
+        {% bootstrap_css %}
+    </head>
+
+    
+    <body>
+        <div class="container-fluid">
+            {% block content %}
+            
+            {% endblock %}
+        </div>
+        {% bootstrap_javascript jquery='full' %}
+    </body>
+</html>
