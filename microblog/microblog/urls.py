@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello', hello_world),
     path('posts', PostViewset.as_view({'get': 'list', 'post': 'create'})),
-    path('post/<id>', PostViewset.as_view({'get': 'retrieve'}))
+    path('post/<id>', PostViewset.as_view({'get': 'retrieve', 'put': 'update'}))
 ]

@@ -2,13 +2,25 @@ from django.core import serializers
 from django.core.serializers.base import Serializer
 from rest_framework import viewsets
 from blog.models import Post
-from blog.serializer import PostSaveSerializer, PostSerializer
+from blog.serializer import PostRegexSerializer, PostSaveSerializer, PostSerializer, PostUpdateSerializer
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 
 import io
 
 class PostViewset(viewsets.ViewSet):
+
+    def update(self, request, id):
+        queryset = Post.objects.get(pk=id)
+        data = request.data
+        serializer = PostUpdateSerializer(data=data)
+        if serializer.is_valid():
+            serializer.update(queryset, serializer.validated_data)
+            return Response({"status": "ok"})
+        else:
+            return(Response({
+                "errors": serializer.errors
+            }))
 
     def retrieve(self, request, id):
         queryset = Post.objects.get(pk=id)
@@ -22,7 +34,7 @@ class PostViewset(viewsets.ViewSet):
 
     def create(self, request):
         data = request.data
-        serializer = PostSaveSerializer(data=data)
+        serializer = PostRegexSerializer(data=data)
         
         if serializer.is_valid():
             serializer.save()
