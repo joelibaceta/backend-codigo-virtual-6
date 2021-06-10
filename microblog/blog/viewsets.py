@@ -2,7 +2,7 @@ from django.core import serializers
 from django.core.serializers.base import Serializer
 from rest_framework import viewsets
 from blog.models import Post
-from blog.serializer import PostSerializer
+from blog.serializer import PostSaveSerializer, PostSerializer
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 
@@ -22,13 +22,12 @@ class PostViewset(viewsets.ViewSet):
 
     def create(self, request):
         data = request.data
-        serializer = PostSerializer(data=data)
+        serializer = PostSaveSerializer(data=data)
         
         if serializer.is_valid():
             serializer.save()
             reponse = {
-                "status": serializer.is_valid(),
-                "data": serializer.data
+                "status": serializer.is_valid()
             }
             return Response(reponse)
         else:
