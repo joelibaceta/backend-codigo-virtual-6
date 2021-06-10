@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blog.views import hello_world, create_post, serialize_demo
+from blog.viewsets import PostViewset
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello', hello_world),
-    path('create_post', create_post),
-    path('serialize_demo', serialize_demo)
+    path('posts', PostViewset.as_view({'get': 'list', 'post': 'create'})),
+    path('post/<id>', PostViewset.as_view({'get': 'retrieve'}))
 ]
