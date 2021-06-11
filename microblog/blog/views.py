@@ -6,12 +6,28 @@ from datetime import date
 import json
 from django.http.response import HttpResponse
 from django.shortcuts import render
-
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
-
 from rest_framework.renderers import JSONRenderer
+from django.contrib.auth.models import User
 
+
+def login(request):
+    if request.method == "GET":
+        return render(request, "login.html", {"flag": False})
+    else:
+        data = request.POST
+
+        try:
+            user = User.objects.get(username=data["user"])
+            if user.check_password(data["password"]):
+                return HttpResponse("ok")
+            else:
+                return render(request, "login.html", {"flag": True})
+        except:
+            return render(request, "login.html", {"flag": True})
+
+            
 @csrf_exempt
 def create_post(request):
     json_data = "{\"content\": \"mi tweet\"}"

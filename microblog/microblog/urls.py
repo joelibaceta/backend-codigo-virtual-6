@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from blog.views import hello_world, create_post, serialize_demo
-from blog.viewsets import PostViewset
+from blog.views import hello_world, create_post, serialize_demo, login
+from blog.viewsets import PostViewset, TokenViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login', login),
     path('hello', hello_world),
     path('posts', PostViewset.as_view({'get': 'list', 'post': 'create'})),
-    path('post/<id>', PostViewset.as_view({'get': 'retrieve', 'put': 'update'}))
+    path('post/<id>', PostViewset.as_view({'get': 'retrieve', 'put': 'update'})),
+    path('tokenize', TokenViewSet.as_view({'post': 'get_token'}))
+
 ]

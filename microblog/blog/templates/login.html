@@ -1,0 +1,12 @@
+
+{% if flag == True %}
+
+    <b>Ha ocurrido un error intentelo nuevamente</b>
+
+{% endif %}
+<form method="POST">
+    {% csrf_token %}
+    Usuario: <input name="user" type="text" />
+    Contrasena: <input name="password" type="password" />
+    <button type="submit">Login</button>
+</form>
