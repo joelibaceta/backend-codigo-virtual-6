@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block contain %}
+<div class="row">
+    {% for product in object_list %}
+        
+            <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{product.name}}</h5>
+                <p class="card-text">{{product.category}}</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{product.brand}}</li>
+                <li class="list-group-item">S/. {{product.price}}</li>
+                <li class="list-group-item">{{product.stock}}</li>
+              </ul>
+              <div class="card-body">
+                <a href="{{preferences[product.id]}}" class="card-link">Comprar</a>
+              </div>
+            
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

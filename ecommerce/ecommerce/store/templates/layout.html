@@ -1,0 +1,15 @@
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        {% bootstrap_css %}
+    </head>
+    <body>
+        <div class="container-fluid">
+            {% block contain %}
+            {% endblock %}
+        </div>
+        {% bootstrap_javascript jquery='full' %}
+    </body>
+</html>

@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+
+{% block contain %}
+    {% for item in items %}
+        <li>{{item.product}}</li>
+    {% endfor %}
+{% endblock %}
