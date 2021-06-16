@@ -4,29 +4,32 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from store.lib.mercadopago import MercadoPago
 
-def listproduct(request):
-    ACCESS_TOKEN = "TEST-280207732140858-061501-6206033fcf93d40ef7becedbba955f97-112585375"
+ACCESS_TOKEN = "TEST-280207732140858-061501-6206033fcf93d40ef7becedbba955f97-112585375"
+mp = MercadoPago(access_token=ACCESS_TOKEN)
 
-    mp = MercadoPago(access_token=ACCESS_TOKEN)
+
+def pay(request):
+    return render(request, "store/payment_form.html")
+
+def listproduct(request):
     products = Product.objects.all()
 
-    preferences = {}
-
     for product in products:
-        data = {
+        preference_data = {
             "items": [{
                 "title": product.name, 
+                "description": "", 
                 "unit_price": product.price,
                 "currency_id": "PEN",
                 "quantity": 1
             }]
         }
-        preference = mp.create_preference(data)
-        preferences[str(product.id)] = preference["sandbox_init_point"]
+        preference = mp.create_preference(data=preference_data)
+        print(preference)
+        product.init_point = preference["sandbox_init_point"]
 
-    render(request, 'store/product_list', {
-        "object_list": products,
-        "preferences": preferences
+    return render(request, 'store/product_list.html', {
+        'object_list': products
     })
 
 

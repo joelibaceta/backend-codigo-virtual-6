@@ -19,6 +19,8 @@ class Product(models.Model):
     stock = models.IntegerField()
     sku = models.CharField(max_length=15)
     brand = models.CharField(max_length=20, null=True)
+    init_point = models.CharField(max_length=250, null=True)
+
     
     category = models.ForeignKey(
         Category, null=True, on_delete=models.SET_NULL)

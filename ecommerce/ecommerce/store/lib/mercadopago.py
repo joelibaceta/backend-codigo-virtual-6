@@ -10,6 +10,7 @@ class MercadoPago():
 
     def get_headers(self):
         HEADERS = { "Authorization": f"Bearer {self.access_token}" }
+        return HEADERS
 
     def create_preference(self, data):
         dumped_data = json.dumps( data )
