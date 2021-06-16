@@ -3,7 +3,8 @@
 {% block contain %}
 
 
-<form action="/process_payment" method="post" id="paymentForm">
+<form action="/dopay" method="post" id="paymentForm">
+    {% csrf_token %}
     <h3>Detalles del comprador</h3>
       <div>
         <div>
@@ -42,7 +43,7 @@
         <div>
           <label for="cardNumber">Número de la tarjeta</label>
           <input type="text" id="cardNumber" data-checkout="cardNumber"
-            onselectstart="return false" onpaste="return false"
+            onselectstart="return false"
             oncopy="return false" oncut="return false"
             ondrag="return false" ondrop="return false" autocomplete=off>
         </div>
@@ -167,7 +168,7 @@
             card.setAttribute('value', response.id);
             form.appendChild(card);
             doSubmit=true;
-            //form.submit();
+            form.submit();
         } else {
             alert("Verify filled data!\n"+JSON.stringify(response, null, 4));
         }

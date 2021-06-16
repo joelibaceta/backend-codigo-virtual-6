@@ -4,6 +4,7 @@ import json
 class MercadoPago():
 
     PREFERENCE_URL = "https://api.mercadopago.com/checkout/preferences"
+    PAYMENT_URL = "https://api.mercadopago.com/v1/payments"
 
     def __init__(self, access_token):
         self.access_token = access_token
@@ -15,4 +16,9 @@ class MercadoPago():
     def create_preference(self, data):
         dumped_data = json.dumps( data )
         response = requests.request("POST", self.__class__.PREFERENCE_URL, data = dumped_data, headers=self.get_headers())
+        return response.json()
+
+    def create_payment(self, data):
+        dumped_data = json.dumps( data )
+        response = requests.request("POST", self.__class__.PAYMENT_URL, data = dumped_data, headers=self.get_headers())
         return response.json()

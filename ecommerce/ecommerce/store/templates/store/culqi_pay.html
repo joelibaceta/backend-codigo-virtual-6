@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block contain %}
+
+<form id = "paymentForm" action="/doculqipay" method="post">
+    {% csrf_token %}
+</form>
+
+<!-- Includes Culqi Checkout on your website -->
+<script src="https://checkout.culqi.com/js/v3"></script>
+
+<!-- Set up the form -->
+<script>
+    Culqi.publicKey = 'pk_test_gFhvKSALDrVdVo85';
+    Culqi.settings({
+        title: 'Culqi Store',
+        currency: 'PEN',
+        description: 'Polo Culqi lover',
+        amount: 3500
+    });
+</script>
+
+<!-- Show Culqi Checkout -->
+<script>
+    Culqi.open();
+</script>
+
+<script>
+    function culqi() {
+        if (Culqi.token) { // ¡Objeto Token creado exitosamente!
+            var token = Culqi.token.id;
+            alert('Se ha creado un token:' + token);
+            let form = document.getElementById('paymentForm');
+            let card = document.createElement('input');
+            card.setAttribute('name', 'token');
+            card.setAttribute('type', 'hidden');
+            card.setAttribute('value', token);
+            form.submit()
+        } else { // ¡Hubo algún problema!
+            // Mostramos JSON de objeto error en consola
+            console.log(Culqi.error);
+            alert(Culqi.error.user_message);
+        }
+    };
+</script>
+                    
+{% endblock %}

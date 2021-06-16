@@ -21,5 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.listproduct),
     path('buy/<pk>/', views.buy),
-    path('pay', views.pay)
+    path('pay', views.pay),
+    path('dopay', views.dopay),
+    path('culqi_pay', views.culqi_pay),
+    path('doculqipay', views.doculqipay)
 ]
