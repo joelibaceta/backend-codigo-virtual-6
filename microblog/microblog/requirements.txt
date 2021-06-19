@@ -1,0 +1,5 @@
+django
+djangorestframework
+django-ratelimit
+django-cors-headers
+djongo

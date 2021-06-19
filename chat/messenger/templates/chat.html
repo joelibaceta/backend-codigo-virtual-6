@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <style>
+            #messages div {
+                display: flex;
+                flex-direction: column;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="messages"></div>
+        <form id="messageForm" action="api/chat" method="post">
+            {% csrf_token %}
+            <input name="nickname" id="nameField"></input>
+            <input name="message" id="messageField"></input>
+            <a href="javascript:SendMessage()"> Enviar </a>
+        </form>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+
+        <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAtUgFvGwEqSi0cHDGreDITwxEeDAoRvAc",
+            authDomain: "chat-codigo6.firebaseapp.com",
+            databaseURL: "https://chat-codigo6-default-rtdb.firebaseio.com",
+            projectId: "chat-codigo6",
+            storageBucket: "chat-codigo6.appspot.com",
+            messagingSenderId: "94091301641",
+            appId: "1:94091301641:web:9ba304484240ba538ff9d8"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+
+        db.collection("messages").onSnapshot((querySnapshot) => {
+            var messages = [];
+            html = "<div>";
+            querySnapshot.forEach((doc)=> {
+                data = doc.data()
+                messages.push(data)
+                console.log(data)
+                html += "<span>" + data["message"] + "</span>"
+            });
+            html += "</div>"
+            messagediv = document.getElementById("messages");
+            messagediv.innerHTML=html;
+        });
+
+        function SendMessage() {
+            nameField = document.getElementById("nameField");
+            messageField = document.getElementById("messageField");
+             
+            data = {
+                    "username": nameField.value,
+                    "message" : messageField.value
+                }
+            fetch("/api/chat", {
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "post", 
+                redirect: 'follow'
+            })
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+        }
+
+        
+
+
+        // db.collection("messages").add({
+        //     "username": "Charles",
+        //     "message": "hellow everybody"
+        // }).then((docref)=>{
+        //     console.log(docref.id);
+        // }).catch((error)=>{
+        //     console.error(error);
+        // })
+        </script>
+    </body>
+    
+</html>

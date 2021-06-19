@@ -1,4 +1,4 @@
-"""chat URL Configuration
+"""microblog URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -15,13 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from messenger.views import MessageAPI
-from messenger.views import chat_view, send_message
+from blog.views import hello_world, create_post
+from blog.views import serialize_demo, login, slow_api
+from blog.views import whatimeisit, whoiam
+from blog.viewsets import PostViewset, TokenViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/chat', MessageAPI.as_view()),
-    path('', chat_view),
-    path('send_message', send_message)
-
+    path('login', login),
+    path('hello', hello_world),
+    path('slow_api', slow_api),
+    path('posts', PostViewset.as_view({'get': 'list', 'post': 'create'})),
+    path('post/<id>', PostViewset.as_view({'get': 'retrieve', 'put': 'update'})),
+    path('tokenize', TokenViewSet.as_view({'post': 'get_token'})),
+    path('whatimeisit', whatimeisit),
+    path('whoiam', whoiam)
 ]

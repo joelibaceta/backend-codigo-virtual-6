@@ -1,14 +1,17 @@
 from django.db import models
 from messenger.lib.db import db
+from datetime import datetime
 
 # Create your models here.
 
 class ChatMessage():
 
     def create(self, data):
-        db.collection("messages").document("03").create(data)
+        timestamp = str(datetime.timestamp(datetime.now()))
+        db.collection("messages").document(timestamp).create(data)
 
     def all(self):
+
         messages_list = []
         chatref = db.collection("messages")
         queryref = chatref.where("emitter", "==", "Jhon")
