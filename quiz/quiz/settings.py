@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import storages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'exam',
-    "rest_framework"
+    "rest_framework",
+    "storages"
 ]
 
 MIDDLEWARE = [
@@ -120,12 +122,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL= '/assets/'
-MEDIA_ROOT= os.path.join(BASE_DIR, 'assets')
+#MEDIA_URL= '/assets/'
+#MEDIA_ROOT= os.path.join(BASE_DIR, 'assets')
+
+AWS_ACCESS_KEY_ID = 'AKIA5SLIYVKVKQBMOLGN'
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_STORAGE_BUCKET_NAME = 'quizbucketcodigo6'
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+AWS_LOCATION = 'assets'
+
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+DEFAULT_FILE_STORAGE = 'quiz.storage_backends.MediaStorage'

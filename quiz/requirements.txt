@@ -3,3 +3,5 @@ djangorestframework
 pymongo
 dnspython
 Pillow
+boto3
+django-storages
