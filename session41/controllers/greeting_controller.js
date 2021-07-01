@@ -1,6 +1,7 @@
 class greetingController {
 
     static get(req, res) {
+        console.log(req.user);
         if (req.params.name === undefined) {
             res.send({
                 "message": "hello world"

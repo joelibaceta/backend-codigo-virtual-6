@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken')
 
-const TOKEN_SECRET = require('crypto').randomBytes(64).toString('hex');
-
 class AuthController {
 
     static auth(req, res) {
@@ -10,7 +8,7 @@ class AuthController {
 
         if (password =="root") {
             let payload = {username: username}
-            const token = jwt.sign(payload, TOKEN_SECRET, {expiresIn: '1800s'})
+            const token = jwt.sign(payload, process.env.TOKEN_SECRET, {expiresIn: '1800s'})
             res.json(token)
         }
     }

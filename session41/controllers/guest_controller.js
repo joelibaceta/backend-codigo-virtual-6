@@ -5,6 +5,7 @@ const { Op } = require("sequelize");
 class GuestController {
 
     static findAll(req, res) {
+        console.log(req.user);
         Guest.findAll({
             include: {model: Booking, as: 'booking'},
         })
