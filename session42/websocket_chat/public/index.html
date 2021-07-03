@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Chat</title>
+        <script src="/socket.io/socket.io.js"></script>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <input id="inputName" /><a href="javascript:joinRoom()">Conectar</a>
+        
+        <div id="messageArea">
+            <div id="messages">
+
+            </div>
+            <input id="inputchat"/>
+            <a href="javascript:sendMessage()">Send</a>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
