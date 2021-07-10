@@ -1,0 +1,6 @@
+{
+    "services": {
+        "auth": "http://auth:5000/ping",
+        "alerts": "http://alert:7000/ping"
+    }
+}

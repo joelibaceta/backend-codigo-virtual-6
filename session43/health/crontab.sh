@@ -1,0 +1,1 @@
+*/5 * * * * * adminitrator curl localhost:5000/check_health
